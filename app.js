@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
 const winston = require('winston');
 const { combine, timestamp, printf } = winston.format;
 const myFormat = printf(info => `${info.timestamp} - ${info.message}`);
@@ -22,7 +21,6 @@ const blogs = require('./routes/blogs')
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
     logger.info(req.method + ' ' + req.url);
     next();
