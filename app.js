@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const winston = require('winston');
 const { combine, timestamp, printf } = winston.format;
-const myFormat = printf(info => `${info.timeStamp} - ${info.message}`);
+const myFormat = printf(info => `${info.timestamp} - ${info.message}`);
 
 const logger = winston.createLogger({
     level: 'info',
@@ -18,27 +18,23 @@ const logger = winston.createLogger({
 
 const app = express();
 
-const blog = require('./routes/blog')
-
+const blogs = require('./routes/blogs')
 
 app.set('view engine', 'ejs');
-app.use(logger.log);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
     logger.info(req.method + ' ' + req.url);
     next();
-})
+});
 
-app.use('*', blog);
+app.use('/', blogs);
 
 app.get('*', (req, res) => {
-    res.render('404', {
-        title: 'Page is not found!'
-    })
-})
+    res.render('404', { title: 'Page is not found!' });
+});
 
 const PORT = 4100;
 app.listen(PORT, function () {
     console.log('Server is running on port ' + PORT);
-})
+});

@@ -23,14 +23,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/blogs', (req, res) => {
-    logger.log('info', 'hello world');
     res.json(blogs)
 });
 
 router.get('/blogs/:id', (req, res) => {
     const id = +req.params.id;
     const article = blogs.find(blog => id === blog.id);
-    res.json(article)
+    res.json(article);
 });
 
 router.post('/blogs', (req, res) => {
@@ -63,6 +62,5 @@ router.delete('/blogs/:id', (req, res) => {
     blogs.splice(index, 1);
     res.json(deletedArticle);
 })
-
 
 module.exports = router;
