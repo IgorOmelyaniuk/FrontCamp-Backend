@@ -1,0 +1,32 @@
+html
+    head
+        style
+            include blogs.css
+            include ../styles.css
+            
+    body
+        h1 Blogs
+        div(class="blogs")
+            div(class="blogs-header")
+                div(class="title") Title
+                div(class="content") Content
+                div(class="author") Author
+                div(class="open") Open Blog
+                div(class="edit") Edit Blog
+                div(class="delete") Delete Blog
+            div(class="blogs-content")
+                each blog in blogs
+                    div(class="blogs-item" data-id= blog.id)  
+                        div(class="title")= blog.title
+                        div(class="content")= blog.text 
+                        div(class="author")= blog.author
+                        div(class="open") Open Blog
+                        div(class="edit") Edit
+                        div(class="delete") Delete  
+        div(class="add-blog")
+            form()
+                input(type="text" class="title")
+                input(type="text" class="text")
+                input(type="text" class="author")
+                button(type="submit") Save
+                                
