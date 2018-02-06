@@ -2,43 +2,43 @@ const express = require('express');
 const router = express.Router();
 const Blog = require('../models/blog');
 
-router.get('/', (req, res) => {
-    Blog.find().then(blogs => res.render('blogs/blogs', { blogs}));
+router.get('/', (req, res, next) => {
+    Blog.find()
+    .then(blogs => res.status(200).json(blogs))
+    .catch(err => next(err));
 });
 
-router.get('/:id', (req, res) => {
-    Blog.findById(req.params.id).then(blog => res.render('blog/blog', { blog}));
+router.get('/:id', (req, res, next) => {
+    Blog.findById(req.params.id)
+    .then(blog => res.status(200).render('blog/blog', { blog}))
+    .catch(err => next(err));
 });
 
-// router.post('/blogs', (req, res) => {
-//     const article = {
-//         id: +req.body.id,
-//         title: req.body.title,
-//         text: req.body.text,
-//         // date: req.body.date,
-//         author: req.body.author
-//     }
-//     blogs.push(article);
-//     res.json(article)
-// });
+router.post('/', (req, res, next) => {
+    const blog = {
+        title: req.body.title || 'No title',
+        text: req.body.text || 'No text',
+        author: req.body.author || 'No author'
+    };
+    const newBlog = new Blog(blog);
+    newBlog.save()
+    .then(blog => res.status(200).json(blog))
+    .catch(err => next(err));
+});
 
-// router.put('/blogs/:id', (req, res) => {
-//     const id = +req.params.id;
-//     const updatedArticle = req.body;
-//     blogs.forEach(blog => {
-//         if (id === blog.id) {
-//             blog = updatedArticle;
-//         }
-//     })
-//     res.json(updatedArticle);
-// })
+router.put('/:id', (req, res) => {
+    const newBlog = req.body;
+    Blog.findById(req.params.id)
+    .then(blog => Object.assign(blog, newBlog))
+    .then(blog => blog.save())
+    .then(blog => res.status(200).json(blog))
+    .catch(err => next(err));
+})
 
-// router.delete('/blogs/:id', (req, res) => {
-//     const id = +req.params.id;
-//     const index = blogs.findIndex(blog => id === blog.id);
-//     const deletedArticle = blogs[index];
-//     blogs.splice(index, 1);
-//     res.json(deletedArticle);
-// })
+router.delete('/:id', (req, res) => {
+    Blog.findByIdAndRemove(req.params.id)
+    .then(blog => res.status(200).json(blog))
+    .catch(err => next(err));
+});
 
 module.exports = router;

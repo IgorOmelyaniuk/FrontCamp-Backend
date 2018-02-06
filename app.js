@@ -32,6 +32,12 @@ app.use((req, res, next) => {
 });
 app.use('/blogs', blogs);
 
+app.use((err, req, res, next) => {
+    res.status(500).json(err);
+});
+
+app.get('/', (req, res) => res.status(200).render('blogs/blogs'));
+
 app.get('*', (req, res) => {
     res.render('404/404', { title: 'Page is not found!' });
 });
