@@ -27,7 +27,6 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res) => {
-    console.log(1111)
     const newBlog = req.body;
     Blog.findById(req.params.id)
     .then(blog => Object.assign(blog, newBlog))
