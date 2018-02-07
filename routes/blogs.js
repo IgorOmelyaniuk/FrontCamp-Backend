@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     Blog.findById(req.params.id)
-    .then(blog => res.status(200).render('blog/blog', { blog}))
+    .then(blog => res.status(200).json(blog))
     .catch(err => next(err));
 });
 
@@ -27,6 +27,7 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res) => {
+    console.log(1111)
     const newBlog = req.body;
     Blog.findById(req.params.id)
     .then(blog => Object.assign(blog, newBlog))

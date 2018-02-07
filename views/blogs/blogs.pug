@@ -4,27 +4,42 @@ html
         style
             include ../styles.css
     body
-        h1 Blogs
+        h1 All Blogs
         table(class="table table-striped")
             thead
                 tr
+                    th ID
                     th Title
                     th Text
                     th Author
             tbody
+        h2 Add Blog
         form(class="add-blog")
             div(class='form-group')
-                div(class='row')
-                    div(class='col-auto')
-                        label Author
-                            input(id='author', type='text' class='form-control' required)
-                    div(class='col-auto')
-                        label Title
-                            input(id='title', type='text' class='form-control' required)
-                    div(class='col-auto')
-                        label Text
-                            input(id='text', type='text' class='form-control')
-            button(id='add-blog-btn', type='button' class='btn btn-primary') Save
+                label Title
+                input(id='title', type='text' class='form-control')
+            div(class='form-group')
+                label Text
+                input(id='text', type='text' class='form-control')
+            div(class='form-group')
+                label Author
+                input(id='author', type='text' class='form-control')
+            div(class="row justify-content-center")
+                button(id='add-blog-btn', type='button' class='btn btn-primary') Save
+        h2 Edit Blog
+        form(class="edit-blog")
+            input(id='blog-id', hidden type='text' class='form-control')
+            div(class='form-group')
+                label Title
+                input(id='title-edit', type='text' class='form-control')
+            div(class='form-group')
+                label Text
+                input(id='text-edit', type='text' class='form-control')
+            div(class='form-group')
+                label Author
+                input(id='author-edit', type='text' class='form-control')
+            div(class="row justify-content-center")
+                button(id='edit-blog-btn', disabled type='button' class='btn btn-primary') Edit
         script
             include blogs.js
 
