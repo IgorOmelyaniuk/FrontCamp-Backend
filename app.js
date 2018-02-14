@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const config = require('./config/database');
+const cors = require('cors')
 
 mongoose.connect(config.database);
 
@@ -12,6 +13,7 @@ app.set('views', 'views');
 app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
+app.use(cors());
 app.use('/blogs', blogs);
 
 app.use((err, req, res, next) => {
