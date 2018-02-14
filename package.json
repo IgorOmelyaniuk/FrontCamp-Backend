@@ -12,8 +12,6 @@
   "dependencies": {
     "body-parser": "*",
     "express": "*",
-    "mongoose": "^5.0.3",
-    "pug": "^2.0.0-rc.4",
-    "winston": "^3.0.0-rc1"
+    "mongoose": "^5.0.3"
   }
 }
