@@ -1,5 +1,6 @@
 import React from 'react'
 import './app.less'
+import BlogsList from '../components/blogs-list'
 
 class App extends React.Component {
     constructor() {
@@ -15,16 +16,17 @@ class App extends React.Component {
             .then(blogs => this.setState({blogs}))
     }
 
+    removeBlogHandler = (id) => {
+        fetch(`http://localhost:4100/blogs/${id}`, {method: 'delete'})
+            .then(resp => resp.json())
+            .then(data => this.setState({blogs: this.state.blogs.filter(blog => blog._id !== data._id)}))
+    }
+
     render() {
-        return (
-            <div>
-                <ul>
-                    {this.state.blogs.map(blog =>
-                        <li key={blog._id}>{blog.title}: {blog.text}</li>
-                    )}
-                </ul>
-            </div>
-        )
+        return <BlogsList 
+                    removeBlogHandler={this.removeBlogHandler}
+                    blogs={this.state.blogs}
+                />
     }
 }
 
