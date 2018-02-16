@@ -9,6 +9,7 @@ const BlogsList = (props) => {
 
     return (
         <div>
+            
             <table className="table table-stripped">
                 <thead>
                     <tr>
@@ -19,17 +20,19 @@ const BlogsList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.blogs.map(blog => {
-                        return (
-                            <tr key={blog._id}>
-                                <td>{blog._id}</td>
-                                <td>{blog.title}</td>
-                                <td>{blog.text}</td>
-                                <td>{blog.author}</td>
-                                <td><button onClick={() => removeBlogHandler(blog._id)} className="btn btn-danger">Delete</button></td>
-                            </tr>
-                        ) 
-                    })}
+                    {props.blogs.length > 0 ?
+                        ( props.blogs.map(blog => { 
+                            return (
+                                <tr key={blog._id}>
+                                    <td>{blog._id}</td>
+                                    <td>{blog.title}</td>
+                                    <td>{blog.text}</td>
+                                    <td>{blog.author}</td>
+                                    <td><button onClick={() => removeBlogHandler(blog._id)} className="btn btn-danger">Delete</button></td>
+                                </tr>
+                            )})
+                        ) : ( <div className="empty-row">There aren't blogs by this author</div>)
+                    }
                 </tbody>   
             </table>
             
