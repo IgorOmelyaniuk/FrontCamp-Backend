@@ -3,8 +3,8 @@ import './style.less'
 
 const BlogsList = (props) => {
 
-    const removeBlog = (id) => {
-        props.removeBlogHandler(id);
+    const removeBlogHandler = _id => {
+        props.removeBlog(_id);
     }
 
     return (
@@ -26,13 +26,13 @@ const BlogsList = (props) => {
                                 <td>{blog.title}</td>
                                 <td>{blog.text}</td>
                                 <td>{blog.author}</td>
-                                <td><button className="btn btn-success">Edit</button></td>
-                                <td><button onClick={() => removeBlog(blog._id)} className="btn btn-danger">Delete</button></td>
+                                <td><button onClick={() => removeBlogHandler(blog._id)} className="btn btn-danger">Delete</button></td>
                             </tr>
                         ) 
                     })}
                 </tbody>   
             </table>
+            
         </div>
     )
 }

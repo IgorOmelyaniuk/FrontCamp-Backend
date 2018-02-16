@@ -13,6 +13,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0-beta.22",
+    "react-router-dom": "^4.2.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.11.1"
   },
