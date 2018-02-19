@@ -20,13 +20,14 @@ class App extends React.Component {
     }
 
     filterByAuthor = event => {
-        const value = event.target.value.toLowerCase();
-        this.setState({
-            author: event.target.value,
-            filteredBlogs: this.state.blogs.filter(blog => {
-                if (blog.author.toLowerCase().indexOf(value) === 0) return blog;
-            })
-        })
+        const value = event.target.value;
+        this.setState({author: event.target.value}, this.calculateFilterBlogs)
+    }
+
+    calculateFilterBlogs = () => {
+        this.setState({filteredBlogs: this.state.blogs.filter(blog => {
+            if (blog.author.toLowerCase().indexOf(this.state.author.toLowerCase()) === 0) return blog;
+        })})
     }
 
     addBlog = data => {
@@ -41,13 +42,14 @@ class App extends React.Component {
             .then(resp => resp.json())
             .then(data => this.setState({
                 blogs: this.state.blogs.concat(data),
-            }))
+            }, this.calculateFilterBlogs))
     }
 
     removeBlog = _id => {
         fetch(`/blogs/${_id}`, {method: 'delete'})
             .then(resp => resp.json())
-            .then(data => this.setState({blogs: this.state.blogs.filter(blog => blog._id !== data._id)}))
+            .then(data => this.setState({blogs: this.state.blogs.filter(blog => blog._id !== data._id)},
+                this.calculateFilterBlogs))
     }
 
     render() {
