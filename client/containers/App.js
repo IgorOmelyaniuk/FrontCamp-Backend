@@ -1,8 +1,8 @@
 import React from 'react'
-import './app.less'
-import BlogsList from '../components/blogs-list'
-import AddBlog from '../components/add-blog'
-import FilterField from '../components/filter-field'
+import BlogsList from '../components/BlogList'
+import AddBlog from '../components/AddBlogForm'
+import FilterField from '../components/FilterField'
+const URL = 'http://localhost:4200'
 
 class App extends React.Component {
     constructor() {
@@ -15,7 +15,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:4100/blogs')
+        fetch(`${URL}/blogs`)
             .then(resp => resp.json())
             .then(blogs => this.setState({blogs}))
     }
@@ -31,7 +31,7 @@ class App extends React.Component {
     }
 
     addBlog = data => {
-        fetch(`http://localhost:4100/blogs/`, {
+        fetch(`${URL}/blogs`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
@@ -46,7 +46,7 @@ class App extends React.Component {
     }
 
     removeBlog = _id => {
-        fetch(`http://localhost:4100/blogs/${_id}`, {method: 'delete'})
+        fetch(`${URL}/blogs/${_id}`, {method: 'delete'})
             .then(resp => resp.json())
             .then(data => this.setState({blogs: this.state.blogs.filter(blog => blog._id !== data._id)}))
     }

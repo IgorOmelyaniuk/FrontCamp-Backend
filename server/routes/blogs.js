@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import Blog from '../models/blog';
+
 const router = express.Router();
-const Blog = require('../models/blog');
 
 router.get('/', (req, res, next) => {
     Blog.find()
