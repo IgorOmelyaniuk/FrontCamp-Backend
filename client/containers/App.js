@@ -56,13 +56,15 @@ class App extends React.Component {
         return (
             <div>
                 <FilterField author={this.state.author} filterByAuthor={this.filterByAuthor} />
-                <BlogsList 
-                    removeBlog={this.removeBlog}
-                    getBlogIdForUpdate={this.getBlogIdForUpdate}
-                    addBlog={this.addBlog}
-                    blogs={this.state.author ? this.state.filteredBlogs : this.state.blogs}
-                />
-                <AddBlog addBlog={this.addBlog}/>
+                <div className="row">
+                    <BlogsList
+                        removeBlog={this.removeBlog}
+                        getBlogIdForUpdate={this.getBlogIdForUpdate}
+                        addBlog={this.addBlog}
+                        blogs={this.state.author ? this.state.filteredBlogs : this.state.blogs}
+                    />
+                    <AddBlog addBlog={this.addBlog}/>
+                </div>
             </div>
         ) 
     }

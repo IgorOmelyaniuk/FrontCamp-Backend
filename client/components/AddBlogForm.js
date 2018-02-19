@@ -19,9 +19,9 @@ class AddBlog extends React.Component {
 
     render() {
         return (
-            <div className="form-wrap">
+            <div className="col-3 offset-1 form-wrap">
                 <h2>Add Blog</h2>
-                <form className="col-3 form" onSubmit={this.addBlogHandler}>
+                <form className="form" onSubmit={this.addBlogHandler}>
                     <div className="form-group">
                         <label>Title</label>
                         <input type="text" className="form-control" ref={title => this.titleInput = title }/>
