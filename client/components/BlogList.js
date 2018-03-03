@@ -2,32 +2,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBlogs } from '../actions';
+import { fetchBlogs, filterByAuthor } from '../actions';
 
 import BlogItem from './BlogItem';
 import FilterField from './FilterField';
 
 class BlogsList extends Component {
-    constructor() {
-        super();
-        this.state = {
-            author: ''
-        }
-    }
 
     componentDidMount() {
         this.props.fetchBlogs();
     }
 
-    filterByAuthor = event => {
+    filterHandler = event => {
         const value = event.target.value;
-        this.setState({author: event.target.value}, this.calculateFilterBlogs);
+        this.props.filterByAuthor(value)
         this.calculateFilterBlogs();
     }
 
     calculateFilterBlogs = () => {
         return this.props.blogs.filter(blog => {
-            return blog.author.toLowerCase().indexOf(this.state.author.toLowerCase()) === 0;
+            return blog.author.toLowerCase().indexOf(this.props.author.toLowerCase()) === 0;
         });
     }
 
@@ -38,11 +32,10 @@ class BlogsList extends Component {
     }
 
     render() {
-        
         return (
             <div className="col-8 offset-2">
                 <div className="d-flex justify-content-between align-items-center">
-                    <FilterField filterByAuthor={this.filterByAuthor}/>
+                    <FilterField filterByAuthor={this.filterHandler}/>
                     <Link to="/blogs/add" className="btn btn-primary">Add post</Link>
                 </div>
                 <div>
@@ -51,11 +44,13 @@ class BlogsList extends Component {
             </div>
         )
     }
-    
 }
 
 const mapStateToProps = state => {
-    return { blogs: state.blogs }
+    return { 
+        blogs: state.blogs,
+        author: state.author
+    }
 }
 
-export default connect(mapStateToProps, { fetchBlogs })(BlogsList)
+export default connect(mapStateToProps, { fetchBlogs, filterByAuthor })(BlogsList)

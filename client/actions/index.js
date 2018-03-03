@@ -5,7 +5,7 @@ export const FETCH_BLOG = 'FETCH_BLOG';
 export const ADD_BLOG = 'ADD_BLOG';
 export const DELETE_BLOG = 'DELETE_BLOG';
 export const EDIT_BLOG = 'EDIT_BLOG';
-
+export const FILTER_BY_AUTHOR = 'FILTER_BY_AUTHOR';
 
 const API_URL = 'http://localhost:4200/api/blogs'
 
@@ -53,5 +53,12 @@ export const editBlog = (values, id, cb) => {
     return {
         type: EDIT_BLOG,
         payload: request
+    }
+}
+
+export const filterByAuthor = author => {
+    return {
+        type: FILTER_BY_AUTHOR,
+        payload: author
     }
 }
