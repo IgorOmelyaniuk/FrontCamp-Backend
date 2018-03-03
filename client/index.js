@@ -1,21 +1,25 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import store from './store';
 
-import App from './containers/App'
-import BlogList from './components/BlogList'
-import AddBlogForm from './components/AddBlogForm'
+import BlogList from './components/BlogList';
+import AddBlogForm from './components/AddBlogForm';
+import EditBlogForm from './components/EditBlogForm';
 import './styles.css'
 
-
 render(
-  <BrowserRouter>
-    <div>
-
-        <Route path='/blogs/add' component={BlogList} />
-        <Route path='/' component={BlogList} />
-
-    </div>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path='/blogs/add' component={AddBlogForm} />
+          <Route path='/blogs/:id/edit' component={EditBlogForm} />
+          <Route path='/' component={BlogList} />
+        </Switch>
+      </div>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 )

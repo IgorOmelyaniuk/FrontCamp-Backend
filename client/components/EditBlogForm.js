@@ -2,9 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addBlog } from '../actions'
+import { editBlog } from '../actions'
 
-class AddBlogForm extends React.Component {
+class EditBlogForm extends React.Component {
 
     renderField(field) {
         const { meta: {touched, error} } = field;
@@ -26,7 +26,7 @@ class AddBlogForm extends React.Component {
     }
 
     onSubmit(values) {
-        this.props.addBlog(values, () => {
+        this.props.editBlog(values, this.props.blog._id, () => {
             this.props.history.push('/');
         });
     }
@@ -36,7 +36,7 @@ class AddBlogForm extends React.Component {
 
         return (
             <div className="col-6 offset-3 form-wrap">
-                <h2 className="text-center">Add Blog</h2>
+                <h2 className="text-center">Edit Blog</h2>
                 <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                     <Field
                         label="Title"
@@ -53,7 +53,7 @@ class AddBlogForm extends React.Component {
                         name="author"
                         component={this.renderField}
                     />
-                    <button style={{marginRight: '20px'}} type="submit" className="btn btn-primary">Add Post</button>
+                    <button style={{marginRight: '20px'}} type="submit" className="btn btn-primary">Edit Post</button>
                     <Link className="btn btn-danger" to="/">Cancel</Link>
                 </form>
             </div>
@@ -79,9 +79,21 @@ const validate = values => {
     return errors;
 }
 
-export default reduxForm({
+const mapStateToProps = ({ blogs }, ownProps) => {
+    const blog = blogs.find(blog => blog._id === ownProps.match.params.id);
+
+    return {
+        blog: blog,
+        initialValues: {
+            title: blog.title,
+            text: blog.text,
+            author: blog.author
+        } 
+    }
+}
+
+export default connect(mapStateToProps, { editBlog })(reduxForm({ 
+    form: 'EditForm',
     validate,
-    form: 'AddForm'
-})(
-    connect(null, { addBlog })(AddBlogForm)
-)
+    enableReinitialize: true,
+  })(EditBlogForm));

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { deleteBlog } from '../actions';
+import { connect } from 'react-redux';
 
 class BlogItem extends Component {
 
     removeBlogHandler = _id => {
-        fetch(`http://localhost:4200/blogs/${_id}`, {method: 'delete'})
-            .then(resp => resp.json())
-            .then(data => this.setState({blogs: this.state.blogs.filter(blog => blog._id !== data._id)},
-                this.calculateFilterBlogs))
+        this.props.deleteBlog(_id)
     }
 
     render() {
@@ -17,7 +17,8 @@ class BlogItem extends Component {
                     <h4 className="card-title">{blog.title}</h4>
                     <p className="card-text">{blog.text}</p>
                     <h5 className="card-author">{blog.author}</h5>
-                    <button onClick={() => this.removeBlogHandler(blog._id)} className="btn btn-danger">
+                    <Link to={`/blogs/${blog._id}/edit`} className="btn btn-success">Edit</Link>
+                    <button style={{marginLeft: '10px'}} onClick={() => this.removeBlogHandler(blog._id)} className="btn btn-danger">
                         Delete
                     </button>
                 </div>
@@ -26,4 +27,4 @@ class BlogItem extends Component {
     }
 }
 
-export default BlogItem
+export default connect(null, { deleteBlog })(BlogItem)
