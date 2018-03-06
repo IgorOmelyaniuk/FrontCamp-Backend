@@ -37,15 +37,6 @@ export const deleteBlog = id => {
     }
 }
 
-export const fetchBlog = id => {
-    const request = axios.get(`${API_URL}/${id}`)
-
-    return {
-        type: FETCH_BLOG,
-        payload: id
-    }
-}
-
 export const editBlog = (values, id, cb) => {
     const request = axios.put(`${API_URL}/${id}`, values)
         .then(() => cb())
