@@ -1,50 +1,37 @@
 import axios from 'axios';
 
 export const FETCH_BLOGS = 'FETCH_BLOGS';
-export const FETCH_BLOG = 'FETCH_BLOG'; 
+export const FETCH_BLOGS_FULFILLED = 'FETCH_BLOGS_FULFILLED';
 export const ADD_BLOG = 'ADD_BLOG';
+export const ADD_BLOG_FULFILLED = 'ADD_BLOG_FULFILLED';
 export const DELETE_BLOG = 'DELETE_BLOG';
+export const DELETE_BLOG_FULFILLED = 'DELETE_BLOG_FULFILLED';
 export const EDIT_BLOG = 'EDIT_BLOG';
+export const EDIT_BLOG_FULFILLED = 'EDIT_BLOG_FULFILLED';
 export const FILTER_BY_AUTHOR = 'FILTER_BY_AUTHOR';
 
 const API_URL = 'http://localhost:4200/api/blogs'
 
-export const fetchBlogs = () => {
-    const request = axios.get(`${API_URL}`)
-
-    return {
-        type: FETCH_BLOGS,
-        payload: request
-    }
+export const fetchBlogs = () => dispatch => {
+    axios.get(`${API_URL}`)
+        .then(res => dispatch({type: FETCH_BLOGS_FULFILLED, payload: res.data}))
 }
 
-export const addBlog = (values, cb) => {
-    const request = axios.post(`${API_URL}`, values)
+export const addBlog = (values, cb) => dispatch => {  
+    axios.post(`${API_URL}`, values)
+        .then(res => dispatch({type: ADD_BLOG_FULFILLED, payload: res.data}))
         .then(() => cb())
-
-    return {
-        type: ADD_BLOG,
-        payload: request
-    }
 }
 
-export const deleteBlog = id => {
-    const request = axios.delete(`${API_URL}/${id}`)
-
-    return {
-        type: DELETE_BLOG,
-        payload: request
-    }
+export const deleteBlog = id => dispatch => {
+    axios.delete(`${API_URL}/${id}`)
+        .then(res => dispatch({type: DELETE_BLOG_FULFILLED, payload: res.data}))
 }
 
-export const editBlog = (values, id, cb) => {
-    const request = axios.put(`${API_URL}/${id}`, values)
+export const editBlog = (values, id, cb) => dispatch => {
+    axios.put(`${API_URL}/${id}`, values)
+        .then(res => dispatch({type: EDIT_BLOG_FULFILLED, payload: res.data}))
         .then(() => cb())
-
-    return {
-        type: EDIT_BLOG,
-        payload: request
-    }
 }
 
 export const filterByAuthor = author => {
