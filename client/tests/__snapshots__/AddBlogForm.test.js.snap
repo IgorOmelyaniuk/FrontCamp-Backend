@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`subscribe component should AddBlogForm component 1`] = `
+exports[`subscribe component should render AddBlogForm 1`] = `
 <Connect(Form(Connect(AddBlogForm)))
   destroyOnUnmount={true}
   enableReinitialize={false}

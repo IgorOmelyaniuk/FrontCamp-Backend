@@ -2,10 +2,10 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addBlog } from '../actions'
+import { addBlog } from '../actions';
 
 class AddBlogForm extends React.Component {
-
+    
     renderField(field) {
         const { meta: {touched, error} } = field;
         const className = `form-group ${touched && error ? 'has-danger' : ''}`;

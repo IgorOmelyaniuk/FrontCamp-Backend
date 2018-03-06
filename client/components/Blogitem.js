@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteBlog } from '../actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class BlogItem extends Component {
 
@@ -28,3 +29,12 @@ class BlogItem extends Component {
 }
 
 export default connect(null, { deleteBlog })(BlogItem)
+
+BlogItem.propTypes = {
+    blog:  PropTypes.shape({
+        _id: PropTypes.string,
+        title: PropTypes.string,
+        text: PropTypes.string,
+        author: PropTypes.string,
+    }),
+};

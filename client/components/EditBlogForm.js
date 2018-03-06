@@ -2,7 +2,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { editBlog } from '../actions'
+import { editBlog } from '../actions';
+import PropTypes from 'prop-types';
 
 class EditBlogForm extends React.Component {
 
@@ -97,3 +98,12 @@ export default connect(mapStateToProps, { editBlog })(reduxForm({
     validate,
     enableReinitialize: true,
   })(EditBlogForm));
+
+EditBlogForm.propTypes = {
+    blog:  PropTypes.shape({
+        _id: PropTypes.string,
+        title: PropTypes.string,
+        text: PropTypes.string,
+        author: PropTypes.string,
+    }),
+};

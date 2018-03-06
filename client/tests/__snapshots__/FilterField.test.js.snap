@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`subscribe component should render FilterField 1`] = `
+<div
+  className="form-group col-5"
+>
+  <label>
+    Filter blogs by author:
+  </label>
+  <input
+    className="form-control"
+    type="text"
+  />
+</div>
+`;

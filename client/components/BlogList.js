@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchBlogs, filterByAuthor } from '../actions';
-
 import BlogItem from './BlogItem';
 import FilterField from './FilterField';
+import PropTypes from 'prop-types';
 
 class BlogsList extends Component {
 
@@ -54,3 +54,15 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, { fetchBlogs, filterByAuthor })(BlogsList)
+
+BlogsList.propTypes = {
+    blogs: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string,
+          title: PropTypes.string,
+          text: PropTypes.string,
+          author: PropTypes.string
+        })
+    ),
+    author: PropTypes.string
+};
