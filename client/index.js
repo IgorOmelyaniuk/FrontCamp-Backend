@@ -1,25 +1,21 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { hydrate } from 'react-dom';
+import App from './components/App';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import store from './store';
+import { BrowserRouter } from 'react-router-dom';
+import configureStore from './store/configureStore';
 
-import BlogList from './components/BlogList';
-import AddBlogForm from './components/AddBlogForm';
-import EditBlogForm from './components/EditBlogForm';
 import './styles.css'
 
-render(
+const store = configureStore(window.PRELOADED_STATE);
+delete window.PRELOADED_STATE;
+
+const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <div>
-        <Switch>
-          <Route path='/blogs/add' component={AddBlogForm} />
-          <Route path='/blogs/:id/edit' component={EditBlogForm} />
-          <Route path='/' component={BlogList} />
-        </Switch>
-      </div>
+      <App/>
     </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-)
+  </Provider>
+);
+
+hydrate(app, document.getElementById('root'));

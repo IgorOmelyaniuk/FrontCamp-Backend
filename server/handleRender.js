@@ -1,33 +1,71 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { matchRoutes } from 'react-router-config';
 
-// import App from '../client/containers/App';
+import routes from '../client/routes';
+import configureStore from '../client/store/configureStore';
+import App from '../client/components/App';
 
-function renderFullPage(html) {
+function renderFullPage(html, preloadedState) {
   return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/styles.css">
-        
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="root">${html}</div>
-        <script src="/bundle.js"></script>
-    </body>
-    </html>
+      <!doctype html>
+      <html>
+        <head>
+          <meta charset=utf-8>
+          <title>React Server Side Rendering</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <link rel="stylesheet" href="/styles.css">
+        </head>
+        <body>
+          <div id="root">${html}</div>
+          <script>
+            window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          </script>
+          <script src="/bundle.js"></script>
+        </body>
+      </html>
   `;
 }
 
 function handleRender(req, res) {
-  const html = renderToString(<App />);
+  const store = configureStore();
 
-  res.send(renderFullPage(html));
+  const branch = matchRoutes(routes, req.url);
+  const promises = branch.map(({ route, match }) => {
+    const { fetchData } = route.component;
+
+    if (!(fetchData instanceof Function)) {
+      return Promise.resolve(null);
+    }
+
+    return fetchData(store.dispatch, match);
+  });
+
+  return Promise.all(promises)
+    .then(() => {
+      const context = {};
+      const app = (
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={context} >
+            <App />
+          </StaticRouter>
+        </Provider>
+      );
+
+      const html = renderToString(app);
+
+      if (context.url) {
+        // Somewhere a `<Redirect>` was rendered
+        return res.redirect(context.url);
+      }
+
+      // Grab the initial state from our Redux store
+      const preloadedState = store.getState();
+
+      return res.send(renderFullPage(html, preloadedState));
+    });
 }
 
 export default handleRender;
