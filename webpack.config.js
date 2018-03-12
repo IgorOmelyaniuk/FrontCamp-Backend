@@ -1,6 +1,4 @@
-const webpack = require('webpack');	
 const path = require('path');	
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: [
@@ -9,10 +7,6 @@ module.exports = {
     output: {
         path: path.resolve('./public'),
         filename: 'bundle.js'
-    },
-    devServer: {	
-        hot: true,	
-        port: 3600,	
     },
     module: {
         rules: [
@@ -29,12 +23,5 @@ module.exports = {
                 ]
             }
         ]
-    },
-    plugins: [	
-        new webpack.HotModuleReplacementPlugin(),	
-        new HtmlWebpackPlugin({	
-            template: './client/index.html',	
-            inject: 'body'	
-        })	
-    ]
+    }
 }
