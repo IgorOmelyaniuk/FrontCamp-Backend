@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { shallow } from 'enzyme';
 import FilterField from '../components/FilterField'; 
-import toJson from 'enzyme-to-json'
+import { expect } from 'chai';
 
 describe('subscribe component', () => {
-  it('should render FilterField', () => {
-    expect(toJson(shallow(<FilterField/>))).toMatchSnapshot();
+  it('should have input field', () => {
+    const wrapper = shallow(<FilterField />);
+    expect(wrapper.find('input')).to.have.length(1);
   });
 });
