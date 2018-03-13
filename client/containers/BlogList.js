@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBlogs, filterByAuthor } from '../actions';
-import BlogItem from './BlogItem';
-import FilterField from './FilterField';
+import { fetchBlogs, filterByAuthor, deleteBlog } from '../actions';
+import BlogItem from '../components/BlogItem';
+import FilterField from '../components/FilterField';
 import PropTypes from 'prop-types';
 
 class BlogsList extends Component {
@@ -27,8 +27,12 @@ class BlogsList extends Component {
 
     renderBlogs() {
         return this.calculateFilterBlogs().map(blog => {
-            return <BlogItem key={blog._id} blog={blog} />
+            return <BlogItem deleteBlog={this.deleteBlogHandler} key={blog._id} blog={blog} />
         })
+    }
+
+    deleteBlogHandler = _id => {
+        this.props.deleteBlog(_id);
     }
 
     render() {
@@ -53,7 +57,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchBlogs, filterByAuthor })(BlogsList)
+export default connect(
+    mapStateToProps,
+    { fetchBlogs, filterByAuthor, deleteBlog }
+)(BlogsList)
 
 BlogsList.propTypes = {
     blogs: PropTypes.arrayOf(

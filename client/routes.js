@@ -1,6 +1,6 @@
-import BlogList from './components/BlogList';
-import AddBlogForm from './components/AddBlogForm';
-import EditBlogForm from './components/EditBlogForm';
+import BlogList from './containers/BlogList';
+import AddBlogForm from './containers/AddBlogForm';
+import EditBlogForm from './containers/EditBlogForm';
 
 export default [
   {
