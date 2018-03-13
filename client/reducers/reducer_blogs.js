@@ -3,7 +3,7 @@ import {
     ADD_BLOG_FULFILLED,
     DELETE_BLOG_FULFILLED,
     EDIT_BLOG_FULFILLED
-} from '../actions'
+} from '../constants'
 
 export default function(state = [], action) {
     switch(action.type) {
