@@ -9,6 +9,10 @@ import PropTypes from 'prop-types';
 
 class BlogsList extends Component {
 
+    static fetchData(dispatch) {
+        return dispatch(fetchBlogs())
+    }
+
     componentDidMount() {
         this.props.fetchBlogs();
     }
