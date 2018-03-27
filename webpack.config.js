@@ -1,12 +1,13 @@
 const path = require('path');	
 
 module.exports = {
-    entry: [
-        './client/index'
-    ],
+    entry: {
+        reactBundle: './client/index',
+        angularBundle: './public/admin/app.module.js'
+    },
     output: {
         path: path.resolve('./public'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -21,7 +22,14 @@ module.exports = {
                     'style-loader',	
                     'css-loader',	
                 ]
+            },
+            {
+                test: /\.(html)$/,	
+                use: [	
+                    'html-loader'
+                ]
             }
+            
         ]
     }
 }

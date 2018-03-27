@@ -23,7 +23,7 @@ function renderFullPage(html, preloadedState) {
           <script>
             window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
           </script>
-          <script src="/bundle.js"></script>
+          <script src="/reactBundle.js"></script>
         </body>
       </html>
   `;

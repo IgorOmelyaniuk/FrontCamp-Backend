@@ -4,11 +4,13 @@ import mongoose from 'mongoose';
 import config from './config/database';
 import cors from 'cors';
 import handleRender from './handleRender';
+import path from 'path';
+import blogs from './routes/blogs';
 
 mongoose.connect(config.database);
 
 const app = express();
-const blogs = require('./routes/blogs')
+// const blogs = require('./routes/blogs');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -16,6 +18,10 @@ app.use('/api/blogs', blogs);
 
 app.use((err, req, res, next) => {
     res.status(500).json(err);
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/admin/index.html'));
 });
 
 app.use(express.static('public'));
