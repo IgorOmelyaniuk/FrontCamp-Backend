@@ -1,10 +1,13 @@
 import template from './addBlog.html';
 
 const AddBlogComponent = {
-  template,
   bindings: {
+    submitType: '<',
+    submitHandler: '<',
     blog: '<'
   },
+  template,
+
   controller: class AddBlogPage {
     constructor(BlogService, $scope, $state) {
       'ngInject';
@@ -21,17 +24,16 @@ const AddBlogComponent = {
       }
     }
 
-    showError(field) {
-      return (field.$dirty && field.$touched) || this.$scope.addBlog.$submitted;
-    }
+    showErrors(field) {
+      return (field.$dirty || field.$touched);
+    };
 
-    submit(form) {
-      // e.preventDefault();
-      // if (this.$scope.addBlog.$valid) {
-      //   this.BlogService.addBlog(this.blog);
-      //   this.$state.go('admin');
-      // }
-      console.log(form)
+    submit(addBlog) {
+      if (addBlog.$valid) {
+        this.BlogService.addBlog(this.blog);
+        this.$state.go('blogs');
+      }
+
     }
   }
 }

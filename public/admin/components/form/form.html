@@ -1,5 +1,5 @@
 <h2>Add a new blog</h2>
-<form name="addBlog" novalidate ng-submit="$ctrl.submit(addBlog)">
+<form name="blogForm" novalidate ng-submit="$ctrl.submit(blogForm)">
   <div class="form-group">
     <label>Blog Title:</label>
     <input
@@ -9,7 +9,7 @@
       ng-required="true"
       length-validator="5"
     />
-    <div ng-messages="addBlog.title.$error" ng-if="$ctrl.showErrors(addBlog.title)">
+    <div ng-messages="blogForm.title.$error" ng-if="$ctrl.showErrors(blogForm.title)">
       <p class="hint" ng-message="lengthValidator">Blog title must be at least 5 characters.</p>
       <p class="hint" ng-message="required">Blog title is required.</p>
     </div>
@@ -23,7 +23,7 @@
       ng-required="true"
       length-validator="10"
     />
-    <div ng-messages="addBlog.text.$error" ng-if="$ctrl.showErrors(addBlog.text)">
+    <div ng-messages="blogForm.text.$error" ng-if="$ctrl.showErrors(blogForm.text)">
       <p class="hint" ng-message="lengthValidator">Blog text must be at least 10 characters.</p>
       <p class="hint" ng-message="required">Blog text is required.</p>
     </div>
@@ -37,11 +37,11 @@
       ng-required="true"
       minlength="4"
     />
-    <div ng-messages="addBlog.author.$error" ng-if="$ctrl.showErrors(addBlog.author)" ng-minlength="4">
+    <div ng-messages="blogForm.author.$error" ng-if="$ctrl.showErrors(blogForm.author)" ng-minlength="4">
       <p class="hint" ng-message="minlength">Blog author must be at least 4 characters.</p>
       <p class="hint" ng-message="required">Blog author is required.</p>
     </div>
   </div>
-  <button class="btn btn-success" type="submit" ng-disabled="addBlog.$invalid">Create</button>
+  <button class="btn btn-success" type="submit" ng-disabled="blogForm.$invalid">{{$ctrl.submitType}}</button>
   <a class="btn btn-danger" ui-sref="blogs">Cancel</a>
 </form>

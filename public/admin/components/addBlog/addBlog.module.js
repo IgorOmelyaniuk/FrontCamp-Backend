@@ -2,12 +2,12 @@ import angular from 'angular';
 import ngMessages from 'angular-messages';
 
 import AddBlogComponent from './addBlog.component';
-import minlength from '../../validators/form.validator';
+import lengthValidator from '../../validators/form.validator';
 
 const AddBlogModule = angular
   .module('app.add', [ngMessages])
   .component('add', AddBlogComponent)
-  .directive('minlength', minlength)
+  .directive('lengthValidator', lengthValidator)
   .name;
 
 export default AddBlogModule;
