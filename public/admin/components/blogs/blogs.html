@@ -1,0 +1,18 @@
+<div class="row">
+  <h5>All: {{$ctrl.blogs.length}}</h5>
+</div>
+
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Titles</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="blog in $ctrl.blogs">
+        <td>{{blog.title}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

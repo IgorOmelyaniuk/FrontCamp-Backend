@@ -1,0 +1,28 @@
+<h2>Add a new blog</h2>
+<form name="addBlog" novalidate ng-submit="$ctr.submit($event)">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" name="title" ng-model="$ctrl.blog.title" ng-required="true" minlengthr="5"/>
+    <!-- <div class="hint" ng-messages="addBlog.title.$error" ng-if="$ctrl.showError(addBlog.title)">
+      <p ng-message="minlength">Title must be more than 5 characters</p>
+      <p ng-message="required">Title is required</p>
+    </div> -->
+  </div>
+  <div class="form-group">
+    <label>Text</label>
+    <input type="text" class="form-control" name="text" ng-model="$ctrl.blog.text" ng-required="true" minlength="10"/>
+    <!-- <div class="hint" ng-messages="addBlog.text.$error" ng-if="$ctrl.showError(addBlog.text)">
+      <p ng-message="minlength">Text must be more than 10 characters</p>
+      <p ng-message="required">Text is required</p>
+    </div> -->
+  </div>
+  <div class="form-group">
+    <label>Author</label>
+    <input type="text" class="form-control" name="author" ng-model="$ctrl.blog.author" ng-required="true"/>
+    <!-- <div class="hint" ng-messages="addBlog.author.$error" ng-if="$ctrl.showError(addBlog.author)">
+      <p ng-message="required">Author is required</p>
+    </div> -->
+  </div>
+  <button class="btn btn-success" type="submit" ng-disabled="addBlog.$invalid">Create</button>
+  <a class="btn btn-danger" href="/admin">Cancel</a>
+</form>

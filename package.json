@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack -d",
-    "start-server": "babel-node ./server/app",
+    "start-server": "babel-node  ./server/app",
     "start-client": "webpack-dev-server --hot",
     "start": "npm run dev && npm run start-server",
     "test": "jest"
@@ -13,7 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.15",
     "angular": "^1.6.9",
+    "angular-messages": "^1.6.9",
+    "angular-route": "^1.6.9",
     "axios": "^0.18.0",
     "body-parser": "*",
     "cors": "^2.8.4",
