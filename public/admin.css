@@ -9,3 +9,7 @@
 .table thead th {
   border: none;
 }
+
+.hint {
+ color: red;
+}

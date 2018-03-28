@@ -57,11 +57,9 @@ function handleRender(req, res) {
       const html = renderToString(app);
 
       if (context.url) {
-        // Somewhere a `<Redirect>` was rendered
         return res.redirect(context.url);
       }
 
-      // Grab the initial state from our Redux store
       const preloadedState = store.getState();
 
       return res.send(renderFullPage(html, preloadedState));

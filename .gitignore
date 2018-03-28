@@ -2,4 +2,5 @@
 /client/node_modules
 /public/angularBundle.js
 /public/reactBundle.js
+/client/tests/__snapshots__
 *.log

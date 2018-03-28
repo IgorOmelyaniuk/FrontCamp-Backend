@@ -9,10 +9,9 @@ const BlogFormComponent = {
   template,
 
   controller: class BlogFormComponentPage {
-    constructor(BlogService, $scope, $state) {
+    constructor(BlogService, $state) {
       'ngInject';
       this.BlogService = BlogService;
-      this.scope = $scope;
       this.$state = $state;
     }
 
