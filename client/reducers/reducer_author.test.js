@@ -1,5 +1,5 @@
 import AuthorReducer from './reducer_author';
-import { FILTER_BY_AUTHOR } from '../actions';
+import { FILTER_BY_AUTHOR } from '../constants';
 
 describe('author reducer', () => {
     it('should handle initial state', () => {
