@@ -3,7 +3,7 @@ import {
     ADD_BLOG_FULFILLED,
     DELETE_BLOG_FULFILLED,
     EDIT_BLOG_FULFILLED
-} from '../actions';
+} from '../constants';
 
 describe('blog reducer', () => {
     it('should handle initial state', () => {
