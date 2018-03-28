@@ -10,22 +10,22 @@ import App from '../client/components/App';
 
 function renderFullPage(html, preloadedState) {
   return `
-      <!doctype html>
-      <html>
-        <head>
-          <meta charset=utf-8>
-          <title>React Server Side Rendering</title>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-          <link rel="stylesheet" href="/styles.css">
-        </head>
-        <body>
-          <div id="root">${html}</div>
-          <script>
-            window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
-          </script>
-          <script src="/reactBundle.js"></script>
-        </body>
-      </html>
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset=utf-8>
+        <title>React Server Side Rendering</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles.css">
+      </head>
+      <body>
+        <div id="root">${html}</div>
+        <script>
+          window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+        </script>
+        <script src="/reactBundle.js"></script>
+      </body>
+    </html>
   `;
 }
 

@@ -3,4 +3,5 @@
 /public/angularBundle.js
 /public/reactBundle.js
 /client/tests/__snapshots__
+package-lock.json
 *.log
