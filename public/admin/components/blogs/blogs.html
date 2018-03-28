@@ -12,6 +12,10 @@
     <tbody>
       <tr ng-repeat="blog in $ctrl.blogs">
         <td>{{blog.title}}</td>
+        <td>{{blog._id}}</td>
+        <td>
+          <a class="btn btn-danger" ui-sref="edit({ id: blog._id })">Edit</a>
+        </td>
       </tr>
     </tbody>
   </table>

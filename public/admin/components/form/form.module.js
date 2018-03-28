@@ -6,7 +6,7 @@ import lengthValidator from './form.validator';
 
 const BlogFormModule = angular
   .module('app.blogForm', [ngMessages])
-  .component('blogForm', BlogFormComponent)
+  .component('blogform', BlogFormComponent)
   .directive('lengthValidator', lengthValidator)
   .name;
 

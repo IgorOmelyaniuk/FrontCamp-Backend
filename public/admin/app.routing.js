@@ -13,6 +13,15 @@ function routing($urlRouterProvider, $stateProvider, $locationProvider) {
       url: '/admin/add',
       component: 'add'
     })
+    .state('edit', {
+      url: '/admin/edit/:id',
+      component: 'edit',
+      resolve: {
+        blog: function(BlogService, $stateParams) {
+            return BlogService.getBlogById($stateParams.id);
+        }
+      }
+    })
   $locationProvider.html5Mode(true);
 
   routing.$inject = ['$urlRouterProvider, $stateProvider', '$locationProvider'];

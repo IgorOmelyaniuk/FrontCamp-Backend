@@ -16,6 +16,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+    console.log(req.body)
     const blog = {
         title: req.body.title || 'No title',
         text: req.body.text || 'No text',
