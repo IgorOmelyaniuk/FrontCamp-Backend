@@ -1,0 +1,11 @@
+.wrapper {
+  padding: 30px;
+}
+
+.row {
+  padding: 20px 0;
+}
+
+.table thead th {
+  border: none;
+}

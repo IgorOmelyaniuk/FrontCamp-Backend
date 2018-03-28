@@ -10,18 +10,17 @@ import blogs from './routes/blogs';
 mongoose.connect(config.database);
 
 const app = express();
-// const blogs = require('./routes/blogs');
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api/blogs', blogs);
 
 app.use((err, req, res, next) => {
-    res.status(500).json(err);
+  res.status(500).json(err);
 });
 
 app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/admin/index.html'));
+  res.sendFile(path.join(__dirname, '../client/admin/index.html'));
 });
 
 app.use(express.static('public'));
