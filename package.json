@@ -8,7 +8,8 @@
     "start-server": "babel-node  ./server/app",
     "start-client": "webpack-dev-server --hot",
     "start": "npm run dev && npm run start-server",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -54,6 +55,10 @@
     "style-loader": "^0.20.2"
   },
   "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**"
+    ],
     "transform": {
       "^.+\\.(jsx|js)?$": "<rootDir>/node_modules/babel-jest"
     },
